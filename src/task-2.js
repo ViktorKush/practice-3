@@ -18,7 +18,7 @@ export default class EnhancedSet extends Set {
     }
 
     isSuperset(s) {
-        return [...s.intersection(this)].length === [...s].length
+        return [...s.intersection(this)].length === [...s].length;
     }
 
     isSubset(s) {

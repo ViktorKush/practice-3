@@ -28,12 +28,9 @@ export default class ShoppingCart {
     addEventListeners() {
         this.removeAllEl.addEventListener("click", () => {
             this.removeAll();
-        })
+        });
         this.cartEl.addEventListener("click", e => {
-            if (e.target.tagName !== "BUTTON") {
-                return;
-            }
-            this.removeItem(e.  target.closest("li").dataset.itemId);
+            (e.target.tagName === "BUTTON") && this.removeItem(e.target.closest("li").dataset.itemId);
         });
     }
 
@@ -81,7 +78,7 @@ export default class ShoppingCart {
      * @returns {boolean} - true if item is present in shopping cart, false otherwise
      */
     isItemInCart(id) {
-        return [...this.cartEl.children].some((val, i) => val.dataset.itemId === id);
+        return [...this.cartEl.children].some(val => val.dataset.itemId === id);
     }
 
     /**
@@ -89,7 +86,7 @@ export default class ShoppingCart {
      * @returns {boolean} true if there's no items in cart, false otherwise
      */
     isCartEmpty() {
-        return (this.cartEl.children.length === 0);
+        return !this.cartEl.children.length;
     }
 
     /**
@@ -128,7 +125,7 @@ export default class ShoppingCart {
      */
     updateTotal() {
         this.totalEl.innerHTML = this.getTotalSum();
-        this.totalEl.innerHTML += " quantity: " + this.getTotalQty();
+        this.totalEl.innerHTML += ` quantity: ${this.getTotalQty()}`;
     }
 
     /**
@@ -144,6 +141,7 @@ export default class ShoppingCart {
         return Qty;
     }
     getTotalSum() {
+        // return [...item.cartEl.querySelector("li").reduce();
         let total = 0;
         const items = this.cartEl.children;
         for (let i = 0; i < items.length; i++) {
@@ -157,7 +155,7 @@ export default class ShoppingCart {
      * @returns {undefined}
      */
     updateNoItemsMessage() {
-        (this.isCartEmpty()) && this.emptyCartEl.classList.remove("d-none") || this.emptyCartEl.classList.add("d-none");    
+        (this.isCartEmpty()) && this.emptyCartEl.classList.remove("d-none") || this.emptyCartEl.classList.add("d-none");
     }
 
     /**
