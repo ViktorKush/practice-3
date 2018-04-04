@@ -9,7 +9,7 @@ export default function filterTable(tbody, filters) {
         return false;
     }
     for (const row of tbody.children) {
-        if (!([...row.children].filter((x, index) => index > 0).every(filterColumns))) {
+        if (!([...row.children].every(filterColumns))) {
             row.classList.add("d-none");
         } else {
             // row.classList.remove("d-none");

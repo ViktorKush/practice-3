@@ -125,23 +125,23 @@ export default class ShoppingCart {
      */
     updateTotal() {
         this.totalEl.innerHTML = this.getTotalSum();
-        this.totalEl.innerHTML += ` quantity: ${this.getTotalQty()}`;
+        // this.totalEl.innerHTML += ` quantity: ${this.getTotalQty()}`;
     }
 
     /**
      * Get total sum of all items in list
      * @returns {number} Total sum
      */
-    getTotalQty() {
-        let Qty = 0;
-        const items = this.cartEl.children;
-        for (let i = 0; i < items.length; i++) {
-            Qty += parseInt(items[i].dataset.itemQty, 10);
-        }
-        return Qty;
-    }
+    // getTotalQty() {
+    //     let Qty = 0;
+    //     const items = this.cartEl.children;
+    //     for (let i = 0; i < items.length; i++) {
+    //         Qty += parseInt(items[i].dataset.itemQty, 10);
+    //     }
+    //     return Qty;
+    // }
     getTotalSum() {
-        // return [...item.cartEl.querySelector("li").reduce();
+        // return [...item.cartEl.querySelectorAll("li")].reduce((result, item) => +item.dataset.itemTotal + result, 0);
         let total = 0;
         const items = this.cartEl.children;
         for (let i = 0; i < items.length; i++) {
@@ -155,7 +155,11 @@ export default class ShoppingCart {
      * @returns {undefined}
      */
     updateNoItemsMessage() {
-        (this.isCartEmpty()) && this.emptyCartEl.classList.remove("d-none") || this.emptyCartEl.classList.add("d-none");
+        if (this.isCartEmpty()) {
+            this.emptyCartEl.classList.remove("d-none");
+        } else {
+            this.emptyCartEl.classList.add("d-none");
+        }
     }
 
     /**
@@ -163,6 +167,10 @@ export default class ShoppingCart {
      * @returns {undefined}
      */
     updateRemoveAllButton() {
-        (this.isCartEmpty()) && this.removeAllEl.classList.add("d-none") || this.removeAllEl.classList.remove("d-none");
+        if (this.isCartEmpty()) {
+            this.removeAllEl.classList.add("d-none");
+        } else {
+            this.removeAllEl.classList.remove("d-none");
+        }
     }
 }
